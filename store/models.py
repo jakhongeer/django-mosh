@@ -55,3 +55,11 @@ class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, primary_key=True) #One to one relationship added here Customer - Address. on_delete = models.CASCADE - deletes t`he data when customer is deleted
+
+class Cart(models.Model):
+    created_at = models.DateTimeField(auto_now=True) # this field autopopulated when its created
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    Product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField()
